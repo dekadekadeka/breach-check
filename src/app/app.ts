@@ -1,12 +1,24 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [LoginComponent, DashboardComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('breach-check');
+  isLoggedIn = false;
+  userData: any = null;
+
+  handleLogin(event: any) {
+    this.userData = event;
+    this.isLoggedIn = true;
+  }
+
+  handleLogout() {
+    this.userData = null;
+    this.isLoggedIn = false;
+  }
 }
